@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sudoku Solver - Dark Theme</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="card controls">
+      <h2>Controls</h2>
+      <label for="level-select">Select Level:</label>
+      <select id="level-select">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <div class="buttons-container">
+        <button id="new-btn">New Puzzle</button>
+        <button id="solve-btn">Solve</button>
+        <button id="hint-btn">Hint</button>
+        <button id="check-btn">Check</button>
+        <button id="done-btn" disabled>I'm Done</button>
+        <button id="reset-btn">Reset</button>
+        <button id="giveup-btn">Give Up</button>
+      </div>
+      <p style="text-align:center; margin-top:10px; font-size:0.9rem; color:#0aa;">
+        Timer: <span id="timer">00:00</span>
+      </p>
+    </div>
+    <div class="card">
+      <div id="board" class="board"></div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal-root">
+    <div class="modal-content">
+      <h2>🎉 Sudoku</h2>
+      <p id="modal-msg"></p>
+      <button id="next-puzzle-btn">Next Puzzle</button><br>
+      <br><button id="close-modal-btn">Close</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

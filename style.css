@@ -1,0 +1,259 @@
+/* Reset and base */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+  color: #eee;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Container */
+.app {
+  background: #222;
+  border-radius: 16px;
+  box-shadow: 0 0 30px #0ff;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  max-width: 900px;
+  width: 100%;
+  gap: 30px;
+  padding: 24px;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Controls Panel */
+.controls {
+  background: #111;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 20px;
+  box-shadow: 0 0 10px #0ff8;
+  position: relative;
+}
+
+/* Heading */
+h2 {
+  color: #0ff;
+  text-align: center;
+  margin-bottom: 0;
+  text-shadow: 0 0 8px #0ffea0;
+}
+
+/* Level select */
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #0af;
+  user-select: none;
+}
+#level-select {
+  background: #333;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #eee;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+#level-select:hover, #level-select:focus {
+  background: #0af;
+  color: #000;
+  outline: none;
+}
+
+/* Button container at bottom */
+.buttons-container {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Buttons styled */
+button {
+  flex: 1 1 40%;
+  min-width: 120px;
+  padding: 12px 0;
+  background: #0ff;
+  color: #000;
+  font-weight: 700;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,255,255,0.6);
+  transition: background 0.25s ease, transform 0.15s ease;
+  user-select: none;
+}
+button:hover:not(:disabled) {
+  background: #00cccc;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,255,255,0.9);
+}
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* Board styles */
+.board {
+  background: #111;
+  border-radius: 16px;
+  box-shadow: inset 0 0 20px #0ff;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0;
+  max-width: 540px;
+  aspect-ratio: 1;
+  margin: auto;
+  animation: slideUpFadeIn 0.8s ease forwards;
+}
+
+/* Cells */
+.cell {
+  border: 1px solid #333;
+  transition: background 0.3s ease;
+  position: relative;
+}
+
+/* Thicker border for blocks */
+.cell:nth-child(3n) { border-right: 3px solid #0af; }
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54),
+.cell:nth-child(n+73):nth-child(-n+81) { border-bottom: 3px solid #0af; }
+.cell:nth-child(1), .cell:nth-child(10), .cell:nth-child(19),
+.cell:nth-child(28), .cell:nth-child(37), .cell:nth-child(46),
+.cell:nth-child(55), .cell:nth-child(64), .cell:nth-child(73) { border-left: 3px solid #0af; }
+.cell:nth-child(-n+9) { border-top: 3px solid #0af; }
+
+/* Input in cells */
+.cell input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #121212;
+  color: #0ff;
+  font-weight: 900;
+  font-size: 2.2vw;
+  text-align: center;
+  transition: background 0.25s ease, color 0.25s;
+  user-select: none;
+}
+.cell input:focus {
+  background: #0ff6;
+  color: #000;
+  outline: none;
+}
+
+/* Highlight wrong cells */
+.cell.highlight-wrong input {
+  background: #f44242cc;
+  color: #fff;
+  font-weight: 900;
+}
+
+/* Modal */
+#modal-root {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+#modal-root.active {
+  display: flex;
+  animation: fadeIn 0.3s ease forwards;
+}
+.modal-content {
+  background: #222;
+  padding: 30px 40px;
+  border-radius: 22px;
+  max-width: 320px;
+  box-shadow: 0 0 30px rgb(104, 204, 219);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  user-select: none;
+}
+.modal-content h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px #0ff;
+}
+.modal-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+.modal-content button {
+  background: #0af;
+  color: #111;
+  padding: 10px 25px;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 14px;
+  box-shadow: 0 0 10px #0af;
+  transition: background 0.3s ease;
+}
+.modal-content button:hover {
+  background: #00ddff;
+  cursor: pointer;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .app {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    padding: 10px;
+  }
+  .controls {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .buttons-container {
+    flex: 1 1 100%;
+    justify-content: space-around;
+  }
+  button {
+    flex: 1 1 22%;
+    min-width: unset;
+  }
+  .board {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+}
